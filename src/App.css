@@ -1,4 +1,3 @@
-/* Ice Clicker styles (migrated) */
 :root {
   --bg: oklch(0.97 0.01 220);
   --surface: oklch(0.99 0.005 220);
@@ -26,7 +25,6 @@
 
   --font-system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
-  /* Panel offsets relative to center */
   --shop-offset-x: 700px;
   --shop-offset-y: 0px;
   --automation-offset-x: -700px;
@@ -37,7 +35,6 @@
 body { font-family: var(--font-system); background: var(--bg); color: var(--text); line-height: 1.5; }
 img { display: block; max-width: 100%; height: auto; }
 
-/* Soft aurora-style animated background */
 body::before {
   content: "";
   position: fixed;
@@ -121,7 +118,6 @@ body::before {
 }
 @keyframes hover-wiggle { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(-2px) rotate(-0.4deg); } }
 
-/* Center clicker; float shop relative to center */
 .stage { position: relative; width: 100%; min-height: 80vh; display: grid; place-items: center; }
 .shop-floating { position: absolute; top: 50%; left: 50%; transform: translate(calc(-50% + var(--shop-offset-x)), calc(-50% + var(--shop-offset-y))); }
 .automation-floating { position: absolute; top: 50%; left: 50%; transform: translate(calc(-50% + var(--automation-offset-x)), calc(-50% + var(--automation-offset-y))); }

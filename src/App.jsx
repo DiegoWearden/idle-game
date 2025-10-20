@@ -13,13 +13,10 @@ export default function App() {
   const lastTimeRef = useRef(Date.now());
   const autoAccumRef = useRef(0);
 
-  // Automation workers
   const [workers, setWorkers] = useState({ miner: 0, torch: 0, jack: 0 });
-  // Dev mode
   const [devMode, setDevMode] = useState(false);
   const [devAmount, setDevAmount] = useState(100000);
 
-  // Geometric cost scaling (base * factor^n)
   const costs = {
     pickaxe: { base: 5000, factor: 1.15 },
     flamethrower: { base: 20000, factor: 1.25 },
@@ -32,7 +29,6 @@ export default function App() {
     return Math.floor(def.base * Math.pow(def.factor, owned[key] || 0));
   };
 
-  // Automation costs (base * factor^n)
   const workerCosts = {
     miner: { base: 15000, factor: 1.2 },
     torch: { base: 80000, factor: 1.25 },
@@ -45,37 +41,33 @@ export default function App() {
     return Math.floor(def.base * Math.pow(def.factor, workers[key] || 0));
   };
 
-  // Dev helpers
   const addDrops = (amount) => setDrops(v => v + amount);
   const setDropsTo = (amount) => setDrops(Number.isFinite(amount) ? amount : 0);
   const grantOwned = (key, n = 1) => setOwned(o => ({ ...o, [key]: (o[key] || 0) + n }));
   const grantWorker = (key, n = 1) => setWorkers(w => ({ ...w, [key]: (w[key] || 0) + n }));
 
-  // Click value scales with owned items (integer-only: scaled by 100)
   const calculateClickGain = () => {
-    const baseClick = 100; // previously 1.00 → now 100
+    const baseClick = 100;
     return baseClick + (owned.pickaxe * 10) + (owned.flamethrower * 50) + (owned.jackhammer * 200);
   };
 
-  // Calculate passive DPS from automation only (integer-only: scaled by 100)
   const calculateAutoDPS = () => {
-    const minerDPS = workers.miner * 20;   // previously 0.20 → now 20
-    const torchDPS = workers.torch * 100;  // previously 1.00 → now 100
-    const jackOpDPS = workers.jack * 400;  // previously 4.00 → now 400
+    const minerDPS = workers.miner * 20;
+    const torchDPS = workers.torch * 100;
+    const jackOpDPS = workers.jack * 400;
     return minerDPS + torchDPS + jackOpDPS;
   };
 
-  // Game loop for idle generation (automation only)
   useEffect(() => {
     let running = true;
     let prev = performance.now();
     let rafId = 0;
 
     const loop = (ts) => {
-      const deltaTime = Math.min((ts - prev) / 1000, 1); // clamp extreme spikes
+      const deltaTime = Math.min((ts - prev) / 1000, 1);
       prev = ts;
 
-      const currentDPS = calculateAutoDPS(); // scaled by 100
+      const currentDPS = calculateAutoDPS();
       setDps(currentDPS);
 
       if (currentDPS > 0) {
@@ -127,7 +119,6 @@ export default function App() {
     setWorkers(w => ({ ...w, [key]: (w[key] || 0) + 1 }));
   }
 
-  // Format numbers with comma separators (no K/M/B)
   const formatDrops = (num) => Math.floor(num).toLocaleString();
   const formatDps = (num) => Math.floor(num).toLocaleString();
 
