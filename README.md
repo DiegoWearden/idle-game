@@ -1,16 +1,49 @@
-# React + Vite
+# Drip Drip: Ice Clicker (React + Vite)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A lightweight idle clicker built with React and Vite. Click the ice cube to earn Drops, buy tools to increase per-click gains, and hire workers for automatic Drops per second.
 
-Currently, two official plugins are available:
+## Prerequisites
+- Node.js 18+ recommended
+- npm (bundled with Node)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Setup
+```bash
+git clone git@github.com:DiegoWearden/idle-game.git
+cd idle-game
+npm install
+```
 
-## React Compiler
+## Run (development)
+```bash
+npm run dev
+```
+Open the URL printed by Vite (typically http://localhost:5173).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Build (production)
+```bash
+npm run build
+npm run preview
+```
+Then open the preview URL to test the production build locally.
 
-## Expanding the ESLint configuration
+## Gameplay (current)
+- Click the ice cube to gain Drops.
+- Tools (Pickaxe, Flamethrower, Jackhammer) increase Drops per click.
+- Automation (Miner, Torch Operator, Jackhammer Operator) generates Drops per second.
+- Numbers are integer-based (no decimals). Costs scale geometrically per purchase.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Dev Mode
+- Toggle: press Ctrl+Shift+D or add `?dev=1` to the URL.
+- Features: add/set Drops, grant tools or workers quickly.
+
+## Customization
+- Panel positions: in `src/App.css`, adjust `--shop-offset-x/y` and `--automation-offset-x/y`.
+- Styles: edit `src/App.css` for hover effects, animations, and layout.
+
+## Scripts
+- `npm run dev` — start Vite dev server
+- `npm run build` — build to `dist/`
+- `npm run preview` — preview production build
+
+## License
+MIT
