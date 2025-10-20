@@ -12,6 +12,7 @@ export default function App() {
   const [dps, setDps] = useState(0);
   const lastTimeRef = useRef(Date.now());
   const autoAccumRef = useRef(0);
+  const [hasStarted, setHasStarted] = useState(false);
 
   const [workers, setWorkers] = useState({ miner: 0, torch: 0, jack: 0 });
   const [devMode, setDevMode] = useState(false);
@@ -239,11 +240,16 @@ export default function App() {
                     </div>
                   </div>
 
+          {!hasStarted && (
+            <div className="start-hint">Click the ice to start!</div>
+          )}
+
           <button
             className={`ice-cube-button ${isClicking ? "clicking" : ""}`}
             onClick={() => {
               const clickGain = calculateClickGain();
               setDrops(v => v + clickGain);
+              setHasStarted(true);
               setIsClicking(true);
               setTimeout(() => setIsClicking(false), 240);
             }}
